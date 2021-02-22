@@ -16,7 +16,7 @@ class Client extends Model
         'phone',
         'status',
     ];
-
+    public $primaryKey  = 'client_id';
     protected $dataTableColumns = [
         'client_id' => [
             'searchable' => false,

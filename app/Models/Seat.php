@@ -13,7 +13,7 @@ class Seat extends Model
         'seat_number',
         'status',
     ];
-
+    public $primaryKey  = 'seat_id';
     protected $dataTableColumns = [
         'seat_id' => [
             'searchable' => false,

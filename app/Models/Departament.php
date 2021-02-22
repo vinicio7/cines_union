@@ -12,7 +12,7 @@ class Departament extends Model
         'name',
         'status',
     ];
-
+    public $primaryKey  = 'departament_id';
     protected $dataTableColumns = [
         'departament_id' => [
             'searchable' => false,

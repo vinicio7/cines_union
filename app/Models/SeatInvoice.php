@@ -14,7 +14,7 @@ class SeatInvoice extends Model
         'invoice_id',
         'bilboard_id',
     ];
-
+    public $primaryKey  = 'seat_invoice_id';
     protected $dataTableColumns = [
         'seat_invoice_id' => [
             'searchable' => false,

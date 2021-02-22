@@ -17,7 +17,7 @@ class Bilboard extends Model
         'price',
         'status',
     ];
-
+    public $primaryKey  = 'bilboard_id';
     protected $dataTableColumns = [
         'bilboard_id' => [
             'searchable' => false,
@@ -44,5 +44,15 @@ class Bilboard extends Model
             'searchable' => false,
         ],
     ];
+
+    public function room()
+    {
+        return $this->hasOne('App\Models\CinemaRoom', 'room_id', 'room_id');
+    }
+
+    public function movie()
+    {
+        return $this->hasOne('App\Models\Movie', 'movie_id', 'movie_id');
+    }
     
 }

@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class CinemaRoom extends Model
 {    
-   protected $table = 'cinema_room';
-   protected $fillable = [
+    protected $table = 'cinema_room';
+    
+    protected $fillable = [
         'room_id',
         'cinema_id',
         'seat',
         'name_room',
         'status',
     ];
-
+    
+    public $primaryKey  = 'room_id';
+    
     protected $dataTableColumns = [
         'room_id' => [
             'searchable' => false,
@@ -32,5 +35,11 @@ class CinemaRoom extends Model
             'searchable' => false,
         ],
     ];
+    
+    public function cinema()
+    {
+        return $this->hasOne('App\Models\Cinema', 'cinema_id', 'cinema_id');
+    }
+
     
 }

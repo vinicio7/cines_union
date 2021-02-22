@@ -20,7 +20,7 @@ class User extends Model
     protected $hidden = [
         'password',
     ];
-
+    public $primaryKey  = 'user_id';
     protected $dataTableColumns = [
         'user_id' => [
             'searchable' => false,

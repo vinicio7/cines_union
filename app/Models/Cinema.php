@@ -17,7 +17,7 @@ class Cinema extends Model
         'municipality_id',
         'status',
     ];
-
+    public $primaryKey  = 'cinema_id';
     protected $dataTableColumns = [
         'cinema_id' => [
             'searchable' => false,
@@ -44,5 +44,15 @@ class Cinema extends Model
             'searchable' => false,
         ],
     ];
+
+    public function departament()
+    {
+        return $this->hasOne('App\Models\Departament', 'departament_id', 'departament_id');
+    }
+
+    public function municipality()
+    {
+        return $this->hasOne('App\Models\Municipality', 'municipality_id', 'municipality_id');
+    }
     
 }

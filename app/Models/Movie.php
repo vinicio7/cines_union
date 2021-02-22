@@ -18,7 +18,7 @@ class Movie extends Model
         'language',
         'status',
     ];
-
+    public $primaryKey  = 'movie_id';
     protected $dataTableColumns = [
         'movie_id' => [
             'searchable' => false,

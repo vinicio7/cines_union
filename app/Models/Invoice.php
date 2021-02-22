@@ -16,7 +16,7 @@ class Invoice extends Model
         'total',
         'status',
     ];
-
+    public $primaryKey  = 'invoice_id';
     protected $dataTableColumns = [
         'invoice_id' => [
             'searchable' => false,

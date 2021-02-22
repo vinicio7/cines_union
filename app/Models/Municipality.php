@@ -13,7 +13,7 @@ class Municipality extends Model
         'name',
         'status',
     ];
-
+    public $primaryKey  = 'municipality_id';
     protected $dataTableColumns = [
         'municipality_id' => [
             'searchable' => false,

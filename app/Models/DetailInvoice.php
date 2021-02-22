@@ -15,7 +15,7 @@ class DetailInvoice extends Model
         'subtotal',
         'status',
     ];
-
+    public $primaryKey  = 'detail_id';
     protected $dataTableColumns = [
         'detail_id' => [
             'searchable' => false,
