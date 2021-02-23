@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Bilboard extends Model
 {    
    protected $table = 'bilboard';
+
    protected $fillable = [
         'bilboard_id',
+        'cinema_id',
         'room_id',
         'movie_id',
         'start_time',
@@ -17,12 +19,16 @@ class Bilboard extends Model
         'price',
         'status',
     ];
+
     public $primaryKey  = 'bilboard_id';
     protected $dataTableColumns = [
         'bilboard_id' => [
             'searchable' => false,
         ],
         'room_id' => [
+            'searchable' => true,
+        ],
+        'cinema_id' => [
             'searchable' => true,
         ],
         'movie_id' => [
@@ -53,6 +59,11 @@ class Bilboard extends Model
     public function movie()
     {
         return $this->hasOne('App\Models\Movie', 'movie_id', 'movie_id');
+    }
+
+    public function cinema()
+    {
+        return $this->hasOne('App\Models\Cinema', 'cinema_id', 'cinema_id');
     }
     
 }

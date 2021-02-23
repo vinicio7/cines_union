@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Movie;
 use Exception;
 use Validator;
+use Illuminate\Support\Facades\Http;
 
 class MovieController extends Controller
 {
@@ -76,6 +77,54 @@ class MovieController extends Controller
                 'result'  => $this->result,
                 'message' => $this->message,
                 'records' => $this->records,
+            ];
+
+            return response()->json($response, $this->status_code);
+        }
+    }
+
+    public function list(Request $request)
+    {
+        try {
+            $data = Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/popular?language=es-ES')
+            ->json()['results'];
+            $this->status_code  = 200;
+            $this->result       = true;
+            $this->message      = 'Registros consultados correctamente';
+            $this->records      = $data;
+        } catch (Exception $e) {
+            $this->status_code  = 400;
+            $this->result       = false;
+            $this->message      = env('APP_DEBUG') ? $e->getMessage() : $this->message;
+        } finally {
+            $response = [
+                'result'  => $this->result,
+                'message' => $this->message,
+                'records' => $data,
+            ];
+
+            return response()->json($response, $this->status_code);
+        }
+    }
+
+    public function detail(Request $request)
+    {
+        try {
+            $data = Http::get("https://api.themoviedb.org/3/movie/".$request->input('id')."?api_key=308ac3527a5ff386cb4860f63c770ef9&language=es-ES")->json();
+            $this->status_code  = 200;
+            $this->result       = true;
+            $this->message      = 'Registros consultados correctamente';
+            $this->records      = $data;
+        } catch (Exception $e) {
+            $this->status_code  = 400;
+            $this->result       = false;
+            $this->message      = env('APP_DEBUG') ? $e->getMessage() : $this->message;
+        } finally {
+            $response = [
+                'result'  => $this->result,
+                'message' => $this->message,
+                'records' => $data,
             ];
 
             return response()->json($response, $this->status_code);

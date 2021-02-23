@@ -29,6 +29,7 @@ class BilboardController extends Controller
     {
         try {
             $rules = [
+                'cinema_id'                => 'required',
                 'room_id'                  => 'required',
                 'movie_id'                 => 'required',
                 'start_time'               => 'required',
@@ -38,6 +39,7 @@ class BilboardController extends Controller
             ];
 
             $messages = [
+                'cinema_id.required'       => 'Es necesario que ingrese un cine',
                 'room_id.required'         => 'Es necesario que ingrese una sala',
                 'movie_id.required'        => 'Es necesario que ingrese una pelicula',
                 'start_time.required'      => 'Es necesario que ingrese una hora de inicio',
@@ -51,6 +53,7 @@ class BilboardController extends Controller
                 throw new Exception($validator->messages()->first());
             } else {
                 $data = Bilboard::create([
+                    'cinema_id'     => $request->input('cinema_id'),
                     'room_id'       => $request->input('room_id'),
                     'movie_id'      => $request->input('movie_id'),
                     'start_time'    => $request->input('start_time'),
@@ -82,10 +85,104 @@ class BilboardController extends Controller
     public function show($id)
     {
         try {
-            $data = Bilboard::with('room','movie')->where('bilboard_id',$id)->first();
+            $data = Bilboard::with('room','movie','cinema')->where('bilboard_id',$id)->first();
             $this->status_code  = 200;
             $this->result       = true;
             $this->message      = 'Registro consultado correctamente';
+            $this->records      = $data;
+        } catch (Exception $e) {
+            $this->status_code = 400;
+            $this->result      = false;
+            $this->message     = env('APP_DEBUG') ? $e->getMessage() : $this->message;
+        } finally {
+            $response = [
+                'result'  => $this->result,
+                'message' => $this->message,
+                'records' => $data,
+            ];
+
+            return response()->json($response, $this->status_code);
+        }
+    }
+
+    public function view_bilboard(Request $request)
+    {
+        try {
+            if($request->input('cinema_id') && $request->input('date') && $request->input('start_time') && $request->input('end_time') && $request->input('gender') && $request->input('rating') && $request->input('format') && $request->input('language')){
+                
+                $data = Bilboard::where('cinema_id',$request->input('cinema_id'))
+                ->where('date',$request->input('date'))
+                ->where('start_time', '>=', $request->input('start_time'))
+                ->where('end_time', '<=', $request->input('end_time'))
+                ->whereHas('movie', function ($query)use($request) {
+                    return $query->where('gender', '=', $request->input('gender'))->where('rating',$request->input('rating'))->where('format',$request->input('format'))->where('language',$request->input('language'));
+                })
+                ->with('room','movie')
+                ->get();
+                
+            }else if($request->input('cinema_id') && $request->input('date') && $request->input('start_time') && $request->input('end_time') && $request->input('gender') && $request->input('rating') && $request->input('format')){
+                
+                $data = Bilboard::where('cinema_id',$request->input('cinema_id'))
+                ->where('date',$request->input('date'))
+                ->where('start_time', '>=', $request->input('start_time'))
+                ->where('end_time', '<=', $request->input('end_time'))
+                ->whereHas('movie', function ($query)use($request) {
+                    return $query->where('gender', '=', $request->input('gender'))->where('rating',$request->input('rating'))->where('format',$request->input('format'));
+                })
+                ->with('room','movie')
+                ->get();
+                
+            }else if($request->input('cinema_id') && $request->input('date') && $request->input('start_time') && $request->input('end_time') && $request->input('gender') && $request->input('rating')){
+                
+                $data = Bilboard::where('cinema_id',$request->input('cinema_id'))
+                ->where('date',$request->input('date'))
+                ->where('start_time', '>=', $request->input('start_time'))
+                ->where('end_time', '<=', $request->input('end_time'))
+                ->whereHas('movie', function ($query)use($request) {
+                    return $query->where('gender', '=', $request->input('gender'))->where('rating',$request->input('rating'));
+                })
+                ->with('room','movie')
+                ->get();
+                
+            }
+            else if($request->input('cinema_id') && $request->input('date') && $request->input('start_time') && $request->input('end_time') && $request->input('gender')){
+                
+                $data = Bilboard::where('cinema_id',$request->input('cinema_id'))
+                ->where('date',$request->input('date'))
+                ->where('start_time', '>=', $request->input('start_time'))
+                ->where('end_time', '<=', $request->input('end_time'))
+                ->whereHas('movie', function ($query)use($request) {
+                    return $query->where('gender', '=', $request->input('gender'));
+                })
+                ->with('room','movie')
+                ->get();
+
+            }else if($request->input('cinema_id') && $request->input('date') && $request->input('start_time') && $request->input('end_time')){
+                
+                $data = Bilboard::with('room','movie')
+                ->where('cinema_id',$request->input('cinema_id'))
+                ->where('date',$request->input('date'))
+                ->where('start_time', '>=', $request->input('start_time'))
+                ->where('end_time', '<=', $request->input('end_time'))
+                ->get();
+
+            }else if($request->input('cinema_id') && $request->input('date')){
+                
+                $data = Bilboard::with('room','movie')
+                ->where('cinema_id',$request->input('cinema_id'))
+                ->where('date',$request->input('date'))
+                ->get();
+
+            }else if($request->input('cinema_id')){
+                
+                $data = Bilboard::with('room','movie')
+                ->where('cinema_id',$request->input('cinema_id'))
+                ->get();
+
+            }
+            $this->status_code  = 200;
+            $this->result       = true;
+            $this->message      = 'Registros consultados correctamente';
             $this->records      = $data;
         } catch (Exception $e) {
             $this->status_code = 400;

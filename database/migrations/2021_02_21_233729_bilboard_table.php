@@ -11,6 +11,7 @@ class BilboardTable extends Migration
     {
         Schema::create('bilboard', function (Blueprint $table) {
             $table->increments('bilboard_id');
+            $table->integer('cinema_id');
             $table->integer('room_id');
             $table->integer('movie_id');
             $table->time('start_time');

@@ -20,3 +20,8 @@ Route::resource('movies',		    'MovieController');
 Route::resource('seats',		    'SeatController');
 Route::resource('seat/invoice',		'SeatInvoiceController');
 Route::resource('users',		    'UserController');
+
+Route::post('list/cinemas', 		'CinemaController@list');
+Route::post('list/movies', 			'MovieController@list');
+Route::post('view/bilboard', 		'BilboardController@view_bilboard');
+Route::post('detail/movie', 		'MovieController@detail');

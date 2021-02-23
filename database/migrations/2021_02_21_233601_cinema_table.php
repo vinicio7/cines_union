@@ -13,6 +13,8 @@ class CinemaTable extends Migration
             $table->increments('cinema_id');
             $table->string('name');
             $table->string('logo');
+            $table->string('adress');
+            $table->string('phone');
             $table->string('latitude');
             $table->string('longitude');
             $table->integer('departament_id');

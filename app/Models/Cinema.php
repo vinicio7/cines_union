@@ -7,17 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Cinema extends Model
 {    
    protected $table = 'cinema';
+
    protected $fillable = [
         'cinema_id',
         'name',
         'logo',
+        'adress',
+        'phone',
         'latitude',
         'longitude',
         'departament_id',
         'municipality_id',
         'status',
     ];
+
     public $primaryKey  = 'cinema_id';
+
     protected $dataTableColumns = [
         'cinema_id' => [
             'searchable' => false,
@@ -27,6 +32,12 @@ class Cinema extends Model
         ],
         'logo' => [
             'searchable' => false,
+        ],
+        'adress' => [
+            'searchable' => true,
+        ],
+        'phone' => [
+            'searchable' => true,
         ],
         'latitude' => [
             'searchable' => false,

@@ -31,6 +31,8 @@ class CinemaController extends Controller
             $rules = [
                 'name'                      => 'required',
                 'logo'                      => 'required',
+                'adress'                    => 'required',
+                'phone'                     => 'required',
                 'latitude'                  => 'required',
                 'longitude'                 => 'required',
                 'departament_id'            => 'required',
@@ -40,6 +42,8 @@ class CinemaController extends Controller
             $messages = [
                 'name.required'             => 'Es necesario que ingrese un nombre',
                 'logo.required'             => 'Es necesario que ingrese un logo',
+                'adress.required'           => 'Es necesario que ingrese una direccion',
+                'phone.required'            => 'Es necesario que ingrese un telefono',
                 'latitude.required'         => 'Es necesario que ingrese una latitud',
                 'longitude.required'        => 'Es necesario que ingrese una longitud',
                 'departament_id.required'   => 'Es necesario que ingrese un departamento',
@@ -55,6 +59,8 @@ class CinemaController extends Controller
                 $data = Cinema::create([
                     'name'            => $request->input('name'),
                     'logo'            => $request->input('logo'),
+                    'adress'          => $request->input('adress'),
+                    'phone'           => $request->input('phone'),
                     'latitude'        => $request->input('latitude'),
                     'longitude'       => $request->input('longitude'),
                     'departament_id'  => $request->input('departament_id'),
@@ -80,7 +86,36 @@ class CinemaController extends Controller
             return response()->json($response, $this->status_code);
         }
     }
-  
+    
+    public function list(Request $request)
+    {
+        try {
+            if($request->input('departament_id') && $request->input('municipality_id')){
+                $data = Cinema::with('departament','municipality')->where('departament_id',$request->input('departament_id'))->where('municipality_id',$request->input('municipality_id'))->get();
+            
+            }else if ($request->input('departament_id')){
+                $data = Cinema::with('departament','municipality')->where('departament_id',$request->input('departament_id'))->get();
+            
+            }
+            $this->status_code  = 200;
+            $this->result       = true;
+            $this->message      = 'Registros consultados correctamente';
+            $this->records      = $data;
+        } catch (Exception $e) {
+            $this->status_code  = 400;
+            $this->result       = false;
+            $this->message      = env('APP_DEBUG') ? $e->getMessage() : $this->message;
+        } finally {
+            $response = [
+                'result'  => $this->result,
+                'message' => $this->message,
+                'records' => $data,
+            ];
+
+            return response()->json($response, $this->status_code);
+        }
+    }
+
     public function show($id)
     {
         try {
@@ -110,6 +145,8 @@ class CinemaController extends Controller
             $data = Cinema::find($id);
             $data->name             = $request->input('name', $data->name);
             $data->logo             = $request->input('logo', $data->logo);
+            $data->adress           = $request->input('adress', $data->adress);
+            $data->phone            = $request->input('phone', $data->phone);
             $data->latitude         = $request->input('latitude', $data->latitude);
             $data->longitude        = $request->input('longitude', $data->longitude);
             $data->departament_id   = $request->input('departament_id', $data->departament_id);
