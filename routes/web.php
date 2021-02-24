@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('login', 	 'AdminController@login')->name('login');
+Route::post('autenticar', 'AdminController@autenticar')->name('autenticar');
