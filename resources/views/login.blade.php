@@ -29,8 +29,9 @@
                           @endif
                         </script>
                         <form method="POST" action="{{ route('autenticar') }}" class="sign__form">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <a href="index.html" class="sign__logo">
+                            <h2 style="color:white">Cines La Unión</h2>
+                            {{ csrf_field() }}
+                            <a href="{{ route('index') }}" class="sign__logo">
                                 <img src="https://www.launion.com.gt/wp-content/uploads/2019/01/ICONO-100x100.png" alt="">
                             </a>
 

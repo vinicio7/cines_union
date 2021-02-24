@@ -16,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('login', 	 'AdminController@login')->name('login');
-Route::post('autenticar', 'AdminController@autenticar')->name('autenticar');
+Route::get('index', 	 		 'AdminController@index')->name('index');
+Route::get('login', 	 		 'AdminController@login')->name('login');
+Route::get('logout', 	 		 'AdminController@logout')->name('logout');
+Route::get('home', 	 			 'AdminController@home')->name('home');
+Route::post('autenticar', 	     'AdminController@autenticar')->name('autenticar');

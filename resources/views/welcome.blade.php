@@ -1586,7 +1586,7 @@
                 <!-- footer copyright -->
                 <div class="col-12">
                     <div class="footer__copyright">
-                        <small>© 2020 FlixGo. Create by <a href="https://themeforest.net/user/dmitryvolkov/portfolio" target="_blank">Dmitry Volkov</a></small>
+                        <small>© 2021 ILU. Create by <a href="" target="_blank">Vinicio Lopez</a></small>
 
                         <ul>
                             <li><a href="privacy.html">Terms of Use</a></li>
