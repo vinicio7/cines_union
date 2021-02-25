@@ -25,7 +25,7 @@ class CinemaController extends Controller
         $orderBy     = $order; //Index
         $orderByDir  = $request->input('dir', 'asc');
         $searchValue = $request->input('search');
-        $query       = Cinema::eloquentQuery($orderBy, $orderByDir, $searchValue);
+        $query       = Cinema::eloquentQuery($orderBy, $orderByDir, $searchValue)->with('departament','municipality');
         $data        = $query->paginate($length);
         return new DataTableCollectionResource($data);
     }

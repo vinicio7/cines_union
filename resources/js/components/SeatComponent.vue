@@ -69,7 +69,7 @@
                     },
                     {
                         label: 'Sala',
-                        name: 'room_id',
+                        name: 'cinema_room.name_room',
                         orderable: true,
                     },
                     {

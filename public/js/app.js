@@ -2083,11 +2083,11 @@ __webpack_require__.r(__webpack_exports__);
         orderable: true
       }, {
         label: 'Departamento',
-        name: 'departament_id',
+        name: 'departament.name',
         orderable: true
       }, {
         label: 'Municipio',
-        name: 'municipality_id',
+        name: 'municipality.name',
         orderable: true
       }, {
         label: 'Latitud',
@@ -2333,7 +2333,7 @@ __webpack_require__.r(__webpack_exports__);
         orderable: true
       }, {
         label: 'Cine',
-        name: 'cinema_id',
+        name: 'cinema.name',
         orderable: true
       }, {
         label: 'Asientos',
@@ -2654,7 +2654,7 @@ __webpack_require__.r(__webpack_exports__);
         orderable: true
       }, {
         label: 'Sala',
-        name: 'room_id',
+        name: 'cinema_room.name_room',
         orderable: true
       }, {
         label: 'Numero de asiento',
@@ -2880,7 +2880,7 @@ __webpack_require__.r(__webpack_exports__);
         orderable: true
       }, {
         label: 'Cine',
-        name: 'cinema_id',
+        name: 'cinema.name',
         orderable: true
       }, {
         label: 'Tipo',

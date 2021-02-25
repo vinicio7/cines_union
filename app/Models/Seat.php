@@ -30,5 +30,10 @@ class Seat extends Model
             'searchable' => false,
         ],
     ];
+
+    public function cinema_room()
+    {
+        return $this->hasOne('App\Models\CinemaRoom', 'room_id', 'room_id');
+    }
     
 }

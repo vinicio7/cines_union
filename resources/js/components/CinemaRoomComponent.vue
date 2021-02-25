@@ -77,7 +77,7 @@
                     },
                     {
                         label: 'Cine',
-                        name: 'cinema_id',
+                        name: 'cinema.name',
                         orderable: true,
                     },
                     {

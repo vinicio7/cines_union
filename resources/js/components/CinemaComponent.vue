@@ -128,12 +128,12 @@
                     },
                     {
                         label: 'Departamento',
-                        name: 'departament_id',
+                        name: 'departament.name',
                         orderable: true,
                     },
                     {
                         label: 'Municipio',
-                        name: 'municipality_id',
+                        name: 'municipality.name',
                         orderable: true,
                     },
                     {

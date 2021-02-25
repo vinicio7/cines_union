@@ -46,5 +46,10 @@ class User extends Model
             'searchable' => false,
         ],
     ];
+
+    public function cinema()
+    {
+        return $this->hasOne('App\Models\Cinema', 'cinema_id', 'cinema_id');
+    }
     
 }

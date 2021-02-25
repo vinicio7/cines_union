@@ -25,7 +25,7 @@ class SeatController extends Controller
         $orderBy     = $order; //Index
         $orderByDir  = $request->input('dir', 'asc');
         $searchValue = $request->input('search');
-        $query       = Seat::eloquentQuery($orderBy, $orderByDir, $searchValue);
+        $query       = Seat::eloquentQuery($orderBy, $orderByDir, $searchValue)->with('cinema_room');
         $data        = $query->paginate($length);
         return new DataTableCollectionResource($data);
     }

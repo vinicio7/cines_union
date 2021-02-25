@@ -25,7 +25,7 @@ class UserController extends Controller
         $orderBy     = $order; //Index
         $orderByDir  = $request->input('dir', 'asc');
         $searchValue = $request->input('search');
-        $query       = User::eloquentQuery($orderBy, $orderByDir, $searchValue);
+        $query       = User::eloquentQuery($orderBy, $orderByDir, $searchValue)->with('cinema');
         $data        = $query->paginate($length);
         return new DataTableCollectionResource($data);
     }
