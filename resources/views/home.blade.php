@@ -1,7 +1,7 @@
 
 @extends('layouts.admin')
 
-@section('content')
+@section('content_admin')
  <main class="main">
         <div class="container-fluid">
             <div class="row">

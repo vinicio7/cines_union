@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Seat;
 use Exception;
 use Validator;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class SeatController extends Controller
 {
@@ -16,12 +17,16 @@ class SeatController extends Controller
     
     public function index(Request $request)
     {
-        $length         = $request->input('length');
-        $orderBy        = $request->input('column'); //Index
-        $orderByDir     = $request->input('dir', 'asc');
-        $searchValue    = $request->input('search');
-        $query          = Seat::eloquentQuery($orderBy, $orderByDir, $searchValue);
-        $data           = $query->paginate($length);
+        $order = 'seat_id';
+        if( $request->input('order')){
+            $order =  $request->input('seat_id');
+        }
+        $length      = $request->input('length');
+        $orderBy     = $order; //Index
+        $orderByDir  = $request->input('dir', 'asc');
+        $searchValue = $request->input('search');
+        $query       = Seat::eloquentQuery($orderBy, $orderByDir, $searchValue);
+        $data        = $query->paginate($length);
         return new DataTableCollectionResource($data);
     }
  

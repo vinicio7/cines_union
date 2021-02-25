@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 
 class CinemaRoom extends Model
 {    
+    use LaravelVueDatatableTrait;
     protected $table = 'cinema_room';
-    
     protected $fillable = [
         'room_id',
         'cinema_id',

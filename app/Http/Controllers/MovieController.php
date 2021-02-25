@@ -7,6 +7,7 @@ use App\Models\Movie;
 use Exception;
 use Validator;
 use Illuminate\Support\Facades\Http;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class MovieController extends Controller
 {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cinema;
 use Exception;
 use Validator;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class CinemaController extends Controller
 {
@@ -16,8 +17,12 @@ class CinemaController extends Controller
     
     public function index(Request $request)
     {
+        $order = 'cinema_id';
+        if( $request->input('order')){
+            $order =  $request->input('cinema_id');
+        }
         $length      = $request->input('length');
-        $orderBy     = $request->input('column'); //Index
+        $orderBy     = $order; //Index
         $orderByDir  = $request->input('dir', 'asc');
         $searchValue = $request->input('search');
         $query       = Cinema::eloquentQuery($orderBy, $orderByDir, $searchValue);
@@ -30,7 +35,6 @@ class CinemaController extends Controller
         try {
             $rules = [
                 'name'                      => 'required',
-                'logo'                      => 'required',
                 'adress'                    => 'required',
                 'phone'                     => 'required',
                 'latitude'                  => 'required',
@@ -41,7 +45,6 @@ class CinemaController extends Controller
 
             $messages = [
                 'name.required'             => 'Es necesario que ingrese un nombre',
-                'logo.required'             => 'Es necesario que ingrese un logo',
                 'adress.required'           => 'Es necesario que ingrese una direccion',
                 'phone.required'            => 'Es necesario que ingrese un telefono',
                 'latitude.required'         => 'Es necesario que ingrese una latitud',
@@ -58,7 +61,7 @@ class CinemaController extends Controller
             } else {
                 $data = Cinema::create([
                     'name'            => $request->input('name'),
-                    'logo'            => $request->input('logo'),
+                    'logo'            => 'https://www.launion.com.gt/wp-content/uploads/2019/01/ICONO-100x100.png',
                     'adress'          => $request->input('adress'),
                     'phone'           => $request->input('phone'),
                     'latitude'        => $request->input('latitude'),

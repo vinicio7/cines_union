@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 
 class Cinema extends Model
 {    
-   protected $table = 'cinema';
+    use LaravelVueDatatableTrait;
+    protected $table = 'cinema';
 
-   protected $fillable = [
+    protected $fillable = [
         'cinema_id',
         'name',
         'logo',
@@ -22,7 +24,6 @@ class Cinema extends Model
     ];
 
     public $primaryKey  = 'cinema_id';
-
     protected $dataTableColumns = [
         'cinema_id' => [
             'searchable' => false,

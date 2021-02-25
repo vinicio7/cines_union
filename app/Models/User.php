@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 
 class User extends Model
 {    
-   protected $table = 'user';
-   protected $fillable = [
+    use LaravelVueDatatableTrait;
+    protected $table = 'user';
+    protected $fillable = [
         'user_id',
         'cinema_id',
         'type',

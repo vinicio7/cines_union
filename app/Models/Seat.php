@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 
 class Seat extends Model
 {    
-   protected $table = 'seat';
-   protected $fillable = [
+    use LaravelVueDatatableTrait;
+    protected $table = 'seat';
+    protected $fillable = [
         'seat_id',
         'room_id',
         'seat_number',

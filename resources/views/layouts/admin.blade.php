@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="../css/select2.min.css">
     <link rel="stylesheet" href="../css/ionicons.min.css">
     <link rel="stylesheet" href="../css/admin.css">
-
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="https://www.launion.com.gt/wp-content/uploads/2019/01/ICONO-100x100.png" sizes="32x32">
     <link rel="apple-touch-icon" href="https://www.launion.com.gt/wp-content/uploads/2019/01/ICONO-100x100.png">
@@ -21,7 +22,22 @@
     <meta name="keywords" content="">
     <meta name="author" content="Vinicio Lopez">
     <title>Cines La Unión</title>
-
+    <style type="text/css">
+        .main{
+             background-color: #28292d;
+        }
+        .btn-success{
+             background-color: #77a62e;
+             border-color: #77a62e;
+        }
+        td{
+            color:white;
+        }
+        th{
+            color:white;
+        }
+        
+    </style>
 </head>
 <body>
 
@@ -29,7 +45,7 @@
     <header class="header">
         <div class="header__content">
             <!-- header logo -->
-            <a href="index.html" class="header__logo">
+            <a href="{{ route('home') }}" class="header__logo">
                 <img src="https://www.launion.com.gt/wp-content/uploads/2019/01/ICONO-100x100.png" alt="">
             </a>
             <!-- end header logo -->
@@ -48,7 +64,7 @@
     <!-- sidebar -->
     <div class="sidebar">
         <!-- sidebar logo -->
-        <a href="index.html" class="sidebar__logo">
+        <a href="{{ route('home') }}" class="sidebar__logo">
             <img src="https://www.launion.com.gt/wp-content/uploads/2019/01/ICONO-100x100.png" style="width:30%">
         </a>
         <!-- end sidebar logo -->
@@ -64,48 +80,84 @@
                 <p>{{ Session::get('user')->name }}</p>
             </div>
 
-            <button class="sidebar__user-btn" type="button">
+            <a class="sidebar__user-btn" type="button" href="{{ route('logout') }}">
                 <i class="icon ion-ios-log-out"></i>
-            </button>
+            </a>
         </div>
         <!-- end sidebar user -->
 
         <!-- sidebar nav -->
         <ul class="sidebar__nav">
             <li class="sidebar__nav-item">
-                <a href="index.html" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-keypad"></i> Dashboard</a>
+                @if(Request::route()->getName() == 'home')
+                    <a href="{{ route('home') }}" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-keypad"></i> Dashboard</a>
+                @else
+                    <a href="{{ route('home') }}" class="sidebar__nav-link "><i class="icon ion-ios-keypad"></i> Dashboard</a>
+                @endif
             </li>
 
             <li class="sidebar__nav-item">
-                <a href="{{ route('movies') }}" class="sidebar__nav-link"><i class="icon ion-ios-star-half"></i> Cines</a>
+                @if(Request::route()->getName() == 'cinemas')
+                    <a href="{{ route('cinemas') }}" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-star-half"></i> Cines</a>
+                @else
+                    <a href="{{ route('cinemas') }}" class="sidebar__nav-link"><i class="icon ion-ios-star-half"></i> Cines</a>
+                @endif
             </li>
             
             <li class="sidebar__nav-item">
-                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-copy"></i> Salas</a>
+                @if(Request::route()->getName() == 'cinemas/room')
+                    <a href="{{ route('cinemas/room') }}" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-copy"></i> Salas</a>
+                @else()
+                    <a href="{{ route('cinemas/room') }}" class="sidebar__nav-link"><i class="icon ion-ios-copy"></i> Salas</a>
+                @endif
             </li>
 
             <li class="sidebar__nav-item">
-                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Asientos</a>
+                @if(Request::route()->getName() == 'seats')
+                    <a href="{{ route('seats') }}" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-contacts"></i> Asientos</a>
+                @else
+                    <a href="{{ route('seats') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Asientos</a>
+                @endif
             </li>
 
             <li class="sidebar__nav-item">
-                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-film"></i> Peliculas</a>
+                @if(Request::route()->getName() == 'movies')
+                    <a href="{{ route('logout') }}" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-film"></i> Peliculas</a>
+                @else
+                    <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-film"></i> Peliculas</a>
+                @endif
             </li>
 
             <li class="sidebar__nav-item">
-                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-star-half"></i> Cartelera</a>
+                 @if(Request::route()->getName() == 'bilboard')
+                    <a href="{{ route('logout') }}" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-star-half"></i> Cartelera</a>
+                 @else
+                    <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-star-half"></i> Cartelera</a>
+                 @endif
             </li>
 
             <li class="sidebar__nav-item">
-                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Usuarios</a>
+                 @if(Request::route()->getName() == 'users')
+                    <a href="{{ route('users') }}" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-contacts"></i> Usuarios</a>
+                 @else
+                    <a href="{{ route('users') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Usuarios</a>
+                 @endif
             </li>
 
             <li class="sidebar__nav-item">
-                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Departamentos</a>
+                @if(Request::route()->getName() == 'departaments')
+                    <a href="{{ route('logout') }}" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-contacts"></i> Departamentos</a>
+                @else
+                    <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Departamentos</a>
+                @endif
             </li>
 
             <li class="sidebar__nav-item">
-                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-coments"></i> Municipios</a>
+                @if(Request::route()->getName() == 'municipalitys')
+                    <a href="{{ route('logout') }}" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-contacts"></i> Municipios</a>
+                @else
+                    <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Municipios</a>
+                @endif
             </li>
 
            
@@ -119,17 +171,10 @@
     <!-- end sidebar -->
 
     <!-- main content -->
-    @yield('content')
+    @yield('content_admin')
    
     <!-- end main content -->
 
     <!-- JS -->
-    <script src="../js/jquery-3.5.1.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/jquery.magnific-popup.min.js"></script>
-    <script src="../js/jquery.mousewheel.min.js"></script>
-    <script src="../js/jquery.mCustomScrollbar.min.js"></script>
-    <script src="../js/select2.min.js"></script>
-    <script src="../js/admin.js"></script>
 </body>
 </html>

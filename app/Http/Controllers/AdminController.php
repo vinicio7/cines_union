@@ -53,8 +53,36 @@ class AdminController extends Controller
         }
     }
 
-    public function movies(Request $request){
-        return view('movies');
+    public function cinemas(Request $request){
+        if(session()->get('user')){
+            return view('cinemas');
+        }else{
+            return view('login');
+        }
+    }
+
+    public function cinemas_room(Request $request){
+        if(session()->get('user')){
+            return view('cinemas_room');
+        }else{
+            return view('login');
+        }
+    }
+
+    public function seats(Request $request){
+        if(session()->get('user')){
+            return view('seats');
+        }else{
+            return view('login');
+        }
+    }
+
+    public function users(Request $request){
+        if(session()->get('user')){
+            return view('users');
+        }else{
+            return view('login');
+        }
     }
 
     public function home(Request $request){
