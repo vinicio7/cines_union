@@ -77,35 +77,38 @@
             </li>
 
             <li class="sidebar__nav-item">
-                <a href="catalog.html" class="sidebar__nav-link"><i class="icon ion-ios-film"></i> Catalog</a>
-            </li>
-
-            <li class="sidebar__nav-item">
-                <a href="users.html" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Users</a>
-            </li>
-
-            <li class="sidebar__nav-item">
-                <a href="comments.html" class="sidebar__nav-link"><i class="icon ion-ios-chatbubbles"></i> Comments</a>
-            </li>
-
-            <li class="sidebar__nav-item">
-                <a href="reviews.html" class="sidebar__nav-link"><i class="icon ion-ios-star-half"></i> Reviews</a>
+                <a href="{{ route('movies') }}" class="sidebar__nav-link"><i class="icon ion-ios-star-half"></i> Cines</a>
             </li>
             
-            <!-- dropdown -->
-            <li class="dropdown sidebar__nav-item">
-                <a class="dropdown-toggle sidebar__nav-link" href="#" role="button" id="dropdownMenuMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon ion-ios-copy"></i> Pages</a>
-
-                <ul class="dropdown-menu sidebar__dropdown-menu scrollbar-dropdown" aria-labelledby="dropdownMenuMore">
-                    <li><a href="add-item.html">Add item</a></li>
-                    <li><a href="edit-user.html">Edit user</a></li>
-                    <li><a href="signin.html">Sign In</a></li>
-                    <li><a href="signup.html">Sign Up</a></li>
-                    <li><a href="forgot.html">Forgot password</a></li>
-                    <li><a href="404.html">404 Page</a></li>
-                </ul>
+            <li class="sidebar__nav-item">
+                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-copy"></i> Salas</a>
             </li>
-            <!-- end dropdown -->
+
+            <li class="sidebar__nav-item">
+                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Asientos</a>
+            </li>
+
+            <li class="sidebar__nav-item">
+                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-film"></i> Peliculas</a>
+            </li>
+
+            <li class="sidebar__nav-item">
+                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-star-half"></i> Cartelera</a>
+            </li>
+
+            <li class="sidebar__nav-item">
+                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Usuarios</a>
+            </li>
+
+            <li class="sidebar__nav-item">
+                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Departamentos</a>
+            </li>
+
+            <li class="sidebar__nav-item">
+                <a href="{{ route('logout') }}" class="sidebar__nav-link"><i class="icon ion-ios-coments"></i> Municipios</a>
+            </li>
+
+           
         </ul>
         <!-- end sidebar nav -->
         
